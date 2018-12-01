@@ -1,0 +1,24 @@
+FROM cv3_cuda_contrib_py2
+LABEL maintainer "maciej.w.majewski@gmail.com"
+ENV OPENCV_VERSION 3.4.2
+
+RUN apt-get -y update && \
+    apt-get -y install \
+        libboost-all-dev \
+        libeigen3-dev \
+        libglew-dev \
+        python-numpy \
+        && \
+    wget https://github.com/stevenlovegrove/Pangolin/archive/master.zip -O pangolin.zip &&\
+    unzip -q pangolin.zip &&\
+    rm pangolin.zip &&\
+    cd Pangolin-master &&\
+    mkdir build &&\
+    cd build &&\
+    cmake .. &&\
+    cmake --build . 
+
+
+COPY . /app
+RUN cd /app/ORB_SLAM2/ && ./build.sh
+CMD cd /app/ORB_SLAM2/ && cp lib/* python/ && python python/slam_server.py
