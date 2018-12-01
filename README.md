@@ -1,6 +1,6 @@
 # ORB_SLAM_2_DOCKER	
 
-This is a repositroy that contains dockerfile and instructions for installing the working fork of ORB SLAM 2, 
+This is a repositroy that contains dockerfile and instructions for installing the working fork of ![ORB SLAM 2](https://github.com/mmajewsk/ORB_SLAM2), 
 specifically for the purpose of using it with ![Tonic](https://github.com/mmajewsk/Tonic).
 
 ## Installing pre-requisite docker
@@ -68,5 +68,8 @@ The port 2207 is needed for the python service.
 
 ## Dependencies and other useful links
 
-![](https://github.com/Valian/docker-python-opencv-ffmpeg)
-![](https://github.com/Algomorph/pyboostcvconverter)
+https://github.com/Valian/docker-python-opencv-ffmpeg
+
+https://github.com/Algomorph/pyboostcvconverter
+
+https://github.com/mmajewsk/ORB_SLAM2
