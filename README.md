@@ -14,12 +14,23 @@ wget https://github.com/Valian/docker-python-opencv-ffmpeg/archive/master.zip -O
 unzip -q docker-python-opencv-ffmpeg.zip
 rm docker-python-opencv-ffmpeg.zip
 cd docker-python-opencv-ffmpeg-master
-docker image build -t cv3_cuda_contrib_py2 -f Dockerfile-py2-cuda .
-cd ..
-rm -rf docker-python-opencv-ffmpeg-master
+```
+
+Then build the image:
+
+```
+sudo docker image build -t cv3_cuda_contrib_py2 -f Dockerfile-py2-cuda .
 ```
 
 So building this will take about 2-3 hours, go grab coffee, solve world hunger or smth.
+Go watch [Geohot building a slam](https://youtu.be/7Hlb8YX2-W8).
+
+And then delete unused files:
+
+```
+cd ..
+rm -rf docker-python-opencv-ffmpeg-master
+```
 
 
 ## Installing some dependencies, for dev purposes
