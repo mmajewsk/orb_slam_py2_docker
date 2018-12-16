@@ -20,5 +20,5 @@ RUN apt-get -y update && \
 
 
 COPY . /app
-RUN cd /app/ORB_SLAM2/ && ./build.sh
+RUN cd /app/ORB_SLAM2/ && chmod u+x build.sh && ./build.sh
 CMD cd /app/ORB_SLAM2/ && cp lib/* python/ && python python/slam_server.py
