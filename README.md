@@ -32,22 +32,10 @@ cd ..
 rm -rf docker-python-opencv-ffmpeg-master
 ```
 
-## Preparing workspace
-
-This repository contains only dockerfile, but most of the code is stored in my fork of [ORB_SLAM2](https://github.com/mmajewsk/ORB_SLAM2). So you need two repositories, you can clone only one. For dev purposes its better tyo clone orb slam, and wget the current one:
-
-```
-wget https://github.com/mmajewsk/orb_slam_py2_docker/archive/master.zip -O orb_slam_py2_docker.zip
-unzip -q orb_slam_py2_docker.zip
-mv orb_slam_py2_docker-master orb_slam_py2_docker
-rm orb_slam_py2_docker.zip
-cd orb_slam_py2_docker
-```
 
 ## Installing some dependencies, for dev purposes
 
-For easier development, some dependencies are staying outside the docker.
-Inside `orb_slam_py2_docker` folder run these lines.
+For easier development, some dependencies are staying outside the docker, run these lines.
 
 ```
 git clone https://github.com/mmajewsk/ORB_SLAM2
@@ -57,7 +45,8 @@ git clone https://github.com/mmajewsk/ORB_SLAM2
 wget https://github.com/Algomorph/pyboostcvconverter/archive/master.zip -O pyboostcvconverter.zip
 unzip -q pyboostcvconverter.zip
 rm pyboostcvconverter.zip
-mv pyboostcvconverter-master/include/pyboostcvconverter/pyboostcvconverter.hpp ORB_SLAM2/include/pyboostcvconverter.hpp
+mkdir ORB_SLAM2/include/pyboostcvconverter
+mv pyboostcvconverter-master/include/pyboostcvconverter/pyboostcvconverter.hpp ORB_SLAM2/include/pyboostcvconverter/pyboostcvconverter.hpp
 mv pyboostcvconverter-master/src/pyboost_cv3_converter.cpp ORB_SLAM2/src/pyboost_cv3_converter.cc
 rm -rf pyboostcvconverter-master
 ```
@@ -67,10 +56,18 @@ rm -rf pyboostcvconverter-master
 Everything is contained in the dockerfile, so just build it.
 
 ```
-sudo docker image build -t orb_slam_py2 -f Dockerfile-orb-slam-py2 .
+docker image build -t orb_slam_py2 -f Dockerfile-orb-slam-py2 .
 ```
 
 This should not take long.
+
+
+If you need to limit the resources for your machine you can do it like this:
+
+```
+docker image build -t orb_slam_py2 -f Dockerfile-orb-slam-py2 . --cpu-shares=100 --memory=1024m
+```
+
 
 ## Running
 
@@ -86,13 +83,6 @@ You can also run bash.
 ```
 docker run --rm -p 2207:2207 -e DISPLAY=192.168.1.195:0.0 -it orb_slam_py2 bash
 ```
-
-The port 2207 is needed for the python service.
-
-## Improvements
-
-So the way this is currently installed and build is a bit overcomplicated, I would love to simplify things.
-Also, the service runs python2 not python3, but I wasted too much time on trying to change the version. 
 
 ## Dependencies and other useful links
 
